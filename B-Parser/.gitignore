@@ -1,0 +1,48 @@
+# Visual Studio / Windows Forms typical ignores
+
+# Build folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code settings (if you use VSCode)
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# NuGet packages
+*.nupkg
+packages/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Resharper files
+_ReSharper*/
+*.DotSettings.user
+
+# Others
+*.cache
+*.ilk
+*.pdb
+*.ipch
+*.aps
+*.ncb
+*.sdf
+*.opensdf
+
+# If you have any sensitive data/configs, exclude here
+appsettings.json
+
+.vs

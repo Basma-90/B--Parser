@@ -1,0 +1,50 @@
+"Case Sensitive" = True
+               !--------------------Terminals----------------------------
+Digit = (Digit)
+INT_NUM = ('-'|'+')* {Digit}+
+FLOAT_NUM = ('-'|'+')* {Digit}+ [.]{Digit}+
+ID = {LETTER} ( '_' | {Number} | {LETTER} )*
+LOGIC_OP = 'and' | 'or' | 'not'
+ARITH_OP = '+' | '-' | '*' | '/' | '%'
+COMP_OP = '==' | '!=' | '<' | '<=' | '>' | '>='
+STR = '"'({AlphaNumeric} | '\t' |'\n'|'\\'|'"'|'\'''|'\r'|'\b'|'\f'|'\a'|'\b'|'\?'|' '|'\nnn'|'\xhh')+'"'
+DEDENT = 'DEDENT' |'}'
+INDENT = 'INDENT'|'{'
+!-------------Start Symbol---------------------------------
+"Start Symbol" = <program>
+!------------Rules-----------------------------------------
+<program> ::= 'Basma'<stmlist>'End'
+<stmlist> ::= <stm> <stmlist> | <stm>
+<stm> ::= <assignment>
+        | <ifStatement>
+        | <loop>
+        | <functionDeclaration>
+        | <functionCall>
+        | <returnStm>
+        | <printStm>
+        | <step>
+<assignment> ::= ID '=' <expr>
+<expr> ::= <expr> COMP_OP <term> | <term>
+<term> ::= <term> ARITH_OP <factor> | <factor>
+<factor> ::= '(' <expr> ')' 
+           | ID 
+           | INT_NUM 
+           | FLOAT_NUM 
+           | STR
+           | 'True' | 'False'
+<ifStatement> ::= 'if' <expr> ':' <indentedBlock> 
+              | 'if' <expr> ':' <indentedBlock> 'else:' <indentedBlock>
+<indentedBlock> ::= INDENT <stmlist> DEDENT
+<loop> ::= 'for' ID 'in' <expr> ':' <indentedBlock>
+       | 'while' <expr> ':' <indentedBlock>
+<functionDeclaration> ::= 'def' ID '(' <paramlist> ')' ':' <indentedBlock>
+<paramlist> ::= ID ',' <paramlist> | ID | 
+<functionCall> ::= ID '(' <arglist> ')'
+<arglist> ::= <expr> ',' <arglist> | <expr>
+<returnStm> ::= 'return' <expr>
+<printStm> ::= 'print' '(' <arglist> ')'
+<step> ::= ID'--' 
+         | ID'++'
+         | '++'ID
+         | '--'ID
+  
